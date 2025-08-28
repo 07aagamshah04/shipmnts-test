@@ -26,6 +26,8 @@ app.use(cookieParser());
 const { ConnectMongoDB } = require("./connections");
 
 //
+const Warehouse = require("./routes/warehouse");
+const Product = require("./routes/product");
 
 ConnectMongoDB(MONGO_URL)
   .then(() => {
@@ -36,6 +38,8 @@ ConnectMongoDB(MONGO_URL)
   });
 
 //
+app.use("/api", Warehouse);
+app.use("/api/transaction", Product);
 
 app.listen(PORT, () => {
   console.log(`SERVER CONNECTED AT PORT ${PORT}`);
